@@ -1,5 +1,6 @@
 import os;
 import unidecode;
+
 from sys import platform;
 from selenium import webdriver;
 from selenium.webdriver.common.by import By;
@@ -16,6 +17,39 @@ class Controller:
 
 	def OpenBrowser(self):
 		self.driver.get(self.urlForIndex);
+
+
+	def VoiceSpeak(self, text):
+		self.__navigateToIndexIfNeeded();
+
+		escapedText = self.__escapeText(text);
+		script = 'fluidImprov.voiceControl.speak("{0}");'.format(escapedText);
+
+		self.__execScript(script);
+
+
+	def VoiceCancel(self):
+		self.__navigateToIndexIfNeeded();
+
+		script = 'fluidImprov.voiceControl.cancel()';
+
+		self.__execScript(script);
+
+
+	def SetTextRate(self, rate):
+		self.__navigateToIndexIfNeeded();
+
+		script = 'fluidImprov.config.rate = {0}'.format(rate);
+
+		self.__execScript(script);
+
+
+	def SetTextPitch(self, pitch):
+		self.__navigateToIndexIfNeeded();
+
+		script = 'fluidImprov.config.pitch = {0}'.format(pitch);
+
+		self.__execScript(script);
 
 
 	def __escapeText(self, text):

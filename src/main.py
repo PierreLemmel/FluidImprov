@@ -25,8 +25,13 @@ tk.geometry(dimension);
 window = MainWindow(tk);
 window.pack(side = TOP, fill = BOTH, expand = True);
 
-tk.mainloop();
 
+window.OnSpeechSubmittedCallback(lambda text: controller.VoiceSpeak(text));
+window.OnRateSliderValueChangedCallback(lambda rate: controller.SetTextRate(rate));
+window.OnPitchSliderValueChangedCallback(lambda pitch: controller.SetTextPitch(pitch));
+window.OnCancelButtonClickedCallback(lambda: controller.VoiceCancel());
+
+tk.mainloop();
 
 
 print('Exiting program');
