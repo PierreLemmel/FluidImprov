@@ -1,6 +1,8 @@
 import tkinter as tk;
 
-class MainWindow(tk.Frame):
+from fluidpanel import FluidPanel;
+
+class SpeechPanel(FluidPanel):
 
 	childPaddingX = 4;
 	childPaddingY = 5;
@@ -8,10 +10,8 @@ class MainWindow(tk.Frame):
 	buttonWidth = 17;
 	widgetHeight = 2;
 
-	NSEW = (tk.N, tk.S, tk.E, tk.W);
-
-	def __init__(self, parent):
-		tk.Frame.__init__(self, parent);
+	def __init__(self, parent, **options):
+		super(FluidPanel, self).__init__(parent, options);
 
 		self.__speechSubmittedCallback = None;
 		self.__rateSliderValueChangedCallback = None;
@@ -30,7 +30,7 @@ class MainWindow(tk.Frame):
 		row += 1;
 		self.__initializeCancelButtonRow(row);
 
-		self.__setupGrid(hWeights, vWeights);
+		self._setupGrid(hWeights, vWeights);
 		self.__setControlsPadding(self.childPaddingX, self.childPaddingY);
 
 
@@ -52,18 +52,6 @@ class MainWindow(tk.Frame):
 	def OnCancelButtonClickedCallback(self, callback):
 		self.__funcCheck(callback);
 		self.__cancelButtonClickedCallback = callback;
-
-
-	def __setupGrid(self, horizontalWeights, verticalWeights):
-		i = 0;
-		for hWeight in horizontalWeights:
-			self.columnconfigure(i, weight = hWeight);
-			i += 1;
-
-		j = 0;
-		for vWeight in verticalWeights:
-			self.rowconfigure(j, weight = vWeight);
-			j += 1;
 
 
 	def __setControlsPadding(self, padx, pady):
@@ -143,9 +131,7 @@ class MainWindow(tk.Frame):
 
 
 
-class RateSlider(tk.Frame):
-
-	NSEW = (tk.N, tk.S, tk.E, tk.W);
+class RateSlider(FluidPanel):
 
 	def __init__(self, parent, **options):
 
@@ -156,7 +142,7 @@ class RateSlider(tk.Frame):
 		if ('command' in options):
 			del options['command'];
 
-		tk.Frame.__init__(self, parent, options);
+		super(FluidPanel, self).__init__(parent, options);
 		
 		self.number = 1.0;
 		self.slide = tk.Scale(self, orient = tk.HORIZONTAL, command = self.__setValue, showvalue = 0, fro = 0, to = 20, sliderrelief = tk.RIDGE);
@@ -172,18 +158,9 @@ class RateSlider(tk.Frame):
 		textX1.grid(sticky = self.NSEW, row = 2, column = 1);
 		textx10.grid(sticky = self.NSEW, row = 2, column = 2);
 		
-		self.__setupGrid();
+		self._setupGrid([1, 1, 1], [1, 1, 1]);
 
 		self.slide.set(10);
-
-
-	def __setupGrid(self):
-		
-		for i in range(3):
-			self.columnconfigure(i, weight = 1);
-
-		for j in range(3):
-			self.rowconfigure(j, weight = 1);
 
 
 	def __setValue(self, val):
@@ -203,7 +180,7 @@ class RateSlider(tk.Frame):
 
 
 
-class PitchSlider(tk.Frame):
+class PitchSlider(FluidPanel):
 
 	NSEW = (tk.N, tk.S, tk.E, tk.W);
 
@@ -216,7 +193,7 @@ class PitchSlider(tk.Frame):
 		if ('command' in options):
 			del options['command'];
 
-		tk.Frame.__init__(self, parent, options);
+		super(FluidPanel, self).__init__(parent, options);
 
 		self.number = 1.0;
 		self.slide = tk.Scale(self, orient = tk.HORIZONTAL, command = self.__setValue, showvalue = 0, fro = 0.0, to = 2.0, sliderrelief = tk.RIDGE, resolution = 0.05);
@@ -232,18 +209,9 @@ class PitchSlider(tk.Frame):
 		txt100.grid(sticky = self.NSEW, row = 2, column = 1);
 		txt200.grid(sticky = self.NSEW, row = 2, column = 2);
 		
-		self.__setupGrid();
+		self._setupGrid([1, 1, 1], [1, 1, 1]);
 
 		self.slide.set(1.0);
-
-
-	def __setupGrid(self):
-		
-		for i in range(3):
-			self.columnconfigure(i, weight = 1);
-
-		for j in range(3):
-			self.rowconfigure(j, weight = 1);
 
 
 	def __setValue(self, val):

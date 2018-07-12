@@ -1,5 +1,4 @@
 import os;
-import unidecode;
 
 from sys import platform;
 from selenium import webdriver;
@@ -39,7 +38,7 @@ class Controller:
 	def SetTextRate(self, rate):
 		self.__navigateToIndexIfNeeded();
 
-		script = 'fluidImprov.config.rate = {0}'.format(rate);
+		script = 'fluidImprov.config.textRate = {0}'.format(rate);
 
 		self.__execScript(script);
 
@@ -47,7 +46,7 @@ class Controller:
 	def SetTextPitch(self, pitch):
 		self.__navigateToIndexIfNeeded();
 
-		script = 'fluidImprov.config.pitch = {0}'.format(pitch);
+		script = 'fluidImprov.config.textPitch = {0}'.format(pitch);
 
 		self.__execScript(script);
 
@@ -55,7 +54,6 @@ class Controller:
 	def __escapeText(self, text):
 		escapedText = text.replace('"', '\\"');
 		escapedText = escapedText.replace('\n', '\\n');
-		escapedText = unidecode.unidecode(escapedText);
 
 		return escapedText;
 

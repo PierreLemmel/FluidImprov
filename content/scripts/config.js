@@ -2,31 +2,31 @@
 
 (function(fluidImprov) {
 
-	let _rate = 1.0;
-	let _pitch = 1.0;
+	let _textRate = 1.0;
+	let _textPitch = 1.0;
 
 	fluidImprov.config = {};
 
-	Object.defineProperty(fluidImprov.config, 'rate', {
-		get() { return _rate; },
+	Object.defineProperty(fluidImprov.config, 'textRate', {
+		get() { return _textRate; },
 		set(value) {
 			if (value >= 0.1 && value <= 10.0) {
-				_rate = value;
+				_textRate = value;
 			}
 			else {
-				throw "Invalid rate!";
+				throw "Invalid textRate!";
 			}
 		}
 	});
 
-	Object.defineProperty(fluidImprov.config, 'pitch', {
-		get() { return _pitch; },
+	Object.defineProperty(fluidImprov.config, 'textPitch', {
+		get() { return _textPitch; },
 		set(value) {
 			if (value >= 0.0 && value <= 2.0) {
-				_pitch = value;
+				_textPitch = value;
 			}
 			else {
-				throw "Invalid pitch!";
+				throw "Invalid textPitch!";
 			}
 		}
 	});

@@ -9,8 +9,8 @@
 			const utterance = new SpeechSynthesisUtterance(msg);
 
 			utterance.lang = 'fr-FR';
-			utterance.pitch = fluidImprov.config.pitch;
-			utterance.rate = fluidImprov.config.rate;
+			utterance.pitch = fluidImprov.config.textPitch;
+			utterance.rate = fluidImprov.config.textRate;
 
 			window.speechSynthesis.speak(utterance);
 		};
