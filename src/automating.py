@@ -59,7 +59,7 @@ class Controller:
 
 
 	def __execScript(self, script):
-		print('Executing script: {0}'.format(script));
+		#print('Executing script: {0}'.format(script));
 		self.driver.execute_script(script);
 
 

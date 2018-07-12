@@ -1,24 +1,84 @@
 import tkinter as tk;
 
 from fluidpanel import FluidPanel;
+
+from videopanel import VideoPanel;
+from textpanel import TextPanel;
 from speechpanel import SpeechPanel;
+from musicpanel import MusicPanel;
+
 
 class MainPanel(FluidPanel):
 
+	__labelsFont = ("Helvetica", 12);
+
 	def __init__(self, parent, **options):
+
 		super(FluidPanel, self).__init__(parent, options);
-
-		row = 0;
-		col = 0;
-		self.__initSpeechPanel(row, col);
+		
+		mainPane = tk.PanedWindow(self, orient = tk.HORIZONTAL);
 
 
-		hWeights = [1];
-		vWeights = [1];
+		leftPane = tk.PanedWindow(mainPane, orient = tk.VERTICAL);
 
-		self._setupGrid(hWeights, vWeights);
+		topLeftPanel = tk.Frame(leftPane, background = 'blue');
+		self.__initializeTopLeftPanel(topLeftPanel);
+		leftPane.add(topLeftPanel, stretch = "always");
+
+		bottomLeftPanel = tk.Frame(leftPane, background = 'red');
+		self.__initializeBottomLeftPanel(bottomLeftPanel);
+		leftPane.add(bottomLeftPanel, stretch = "always");
+
+		mainPane.add(leftPane, stretch = "always");
 
 
-	def __initSpeechPanel(self, row, col):
-		self.speechPanel = SpeechPanel(self);
-		self.speechPanel.grid(row = row, column = col, sticky = self.NSEW);
+		rightPane = tk.PanedWindow(mainPane, orient = tk.VERTICAL);
+
+		topRightPanel = tk.Frame(rightPane, background = 'black');
+		self.__initializeTopRightPanel(topRightPanel);
+		rightPane.add(topRightPanel, stretch = "always");
+
+		bottomRightPanel = tk.Frame(rightPane, background = 'white');
+		self.__initializeBottomRightPanel(bottomRightPanel);
+		rightPane.add(bottomRightPanel, stretch = "always");
+		
+		mainPane.add(rightPane, stretch = "always");
+
+
+		mainPane.pack(fill = tk.BOTH, expand = 1);
+
+
+	def __initializeTopLeftPanel(self, topLeftPanel):
+
+		videoLabel = tk.Label(topLeftPanel, text = 'Vidéo', font = self.__labelsFont);
+		videoLabel.pack(side = tk.TOP, fill = tk.X);
+
+		self.videoPanel = VideoPanel(topLeftPanel);
+		self.videoPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
+
+
+	def __initializeBottomLeftPanel(self, bottomLeftPanel):
+
+		speechLabel = tk.Label(bottomLeftPanel, text = 'Voix', font = self.__labelsFont);
+		speechLabel.pack(side = tk.TOP, fill = tk.X);
+
+		self.speechPanel = SpeechPanel(bottomLeftPanel);
+		self.speechPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
+
+
+	def __initializeTopRightPanel(self, topRightPanel):
+
+		textLabel = tk.Label(topRightPanel, text = 'Texte', font = self.__labelsFont);
+		textLabel.pack(side = tk.TOP, fill = tk.X);
+
+		self.textPanel = TextPanel(topRightPanel);
+		self.textPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
+
+
+	def __initializeBottomRightPanel(self, bottomRightPanel):
+
+		musicLabel = tk.Label(bottomRightPanel, text = 'Musique', font = self.__labelsFont);
+		musicLabel.pack(side = tk.TOP, fill = tk.X);
+
+		self.musicPanel = MusicPanel(bottomRightPanel);
+		self.musicPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);

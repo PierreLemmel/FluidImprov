@@ -2,6 +2,12 @@ import tkinter as tk;
 
 class FluidPanel(tk.Frame):
 
+	_childPaddingX = 4;
+	_childPaddingY = 5;
+
+	_buttonWidth = 17;
+	_widgetHeight = 2;
+
 	NSEW = (tk.N, tk.S, tk.E, tk.W);
 
 
@@ -21,3 +27,13 @@ class FluidPanel(tk.Frame):
 		for vWeight in verticalWeights:
 			self.rowconfigure(j, weight = vWeight);
 			j += 1;
+
+
+	def _setControlsPadding(self, padx, pady):
+		for control in self.winfo_children():
+			control.grid_configure(padx = padx, pady = pady);
+
+
+	def _funcCheck(self, func):
+		if not callable(func):
+			raise ValueError('The input parameter is not a function');

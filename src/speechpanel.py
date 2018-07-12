@@ -4,12 +4,6 @@ from fluidpanel import FluidPanel;
 
 class SpeechPanel(FluidPanel):
 
-	childPaddingX = 4;
-	childPaddingY = 5;
-
-	buttonWidth = 17;
-	widgetHeight = 2;
-
 	def __init__(self, parent, **options):
 		super(FluidPanel, self).__init__(parent, options);
 
@@ -31,37 +25,27 @@ class SpeechPanel(FluidPanel):
 		self.__initializeCancelButtonRow(row);
 
 		self._setupGrid(hWeights, vWeights);
-		self.__setControlsPadding(self.childPaddingX, self.childPaddingY);
+		self._setControlsPadding(self._childPaddingX, self._childPaddingY);
 
 
 	def OnSpeechSubmittedCallback(self, callback):
-		self.__funcCheck(callback);
+		self._funcCheck(callback);
 		self.__speechSubmittedCallback = callback;
 
 
 	def OnRateSliderValueChangedCallback(self, callback):
-		self.__funcCheck(callback);
+		self._funcCheck(callback);
 		self.__rateSliderValueChangedCallback = callback;
 
 
 	def OnPitchSliderValueChangedCallback(self, callback):
-		self.__funcCheck(callback);
+		self._funcCheck(callback);
 		self.__pitchSliderValueChangedCallback = callback;
 
 
 	def OnCancelButtonClickedCallback(self, callback):
-		self.__funcCheck(callback);
+		self._funcCheck(callback);
 		self.__cancelButtonClickedCallback = callback;
-
-
-	def __setControlsPadding(self, padx, pady):
-		for control in self.winfo_children():
-			control.grid_configure(padx = padx, pady = pady);
-
-
-	def __funcCheck(self, func):
-		if not callable(func):
-			raise ValueError('The input parameter is not a function');
 
 
 	def __initializeSpeechTextRow(self, row):
@@ -75,7 +59,7 @@ class SpeechPanel(FluidPanel):
 		self.speechTextEntry.grid(row = row, column = col, sticky = self.NSEW);
 		col += 1;
 
-		self.speechTextBtn = tk.Button(self, text = 'Énoncer', width = self.buttonWidth, height = self.widgetHeight, command = self.__onSpeechTextClick);
+		self.speechTextBtn = tk.Button(self, text = 'Énoncer', width = self._buttonWidth, height = self._widgetHeight, command = self.__onSpeechTextClick);
 		self.speechTextBtn.grid(row = row, column = col);
 
 
@@ -102,7 +86,7 @@ class SpeechPanel(FluidPanel):
 
 
 	def __initializeCancelButtonRow(self, row):
-		self.cancelButton = tk.Button(self, width = self.buttonWidth, height = self.widgetHeight, command = self.__onCancelButtonClick, text = 'Annuler');
+		self.cancelButton = tk.Button(self, width = self._buttonWidth, height = self._widgetHeight, command = self.__onCancelButtonClick, text = 'Annuler');
 		self.cancelButton.grid(row = row, column = 1);
 
 
@@ -182,8 +166,6 @@ class RateSlider(FluidPanel):
 
 class PitchSlider(FluidPanel):
 
-	NSEW = (tk.N, tk.S, tk.E, tk.W);
-
 	def __init__(self, parent, **options):
 
 		self.__command = options.get('command', None);
@@ -226,4 +208,4 @@ class PitchSlider(FluidPanel):
 
 
 	def get(self):
-		return self.slide.get();
+		return self.number;
