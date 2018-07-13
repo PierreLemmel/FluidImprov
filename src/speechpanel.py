@@ -87,12 +87,12 @@ class SpeechPanel(FluidPanel):
 	def __initializeButtonsRow(self, row):
 		
 		col = 2;
-		self.speechTextBtn = tk.Button(self, text = 'Énoncer', width = self._buttonWidth, height = self._widgetHeight, command = self.__onSpeechTextClick);
-		self.speechTextBtn.grid(row = row, column = col);
+		speechTextBtn = tk.Button(self, text = 'Énoncer', width = self._buttonWidth, height = self._widgetHeight, command = self.__onSpeechTextClick);
+		speechTextBtn.grid(row = row, column = col);
 				
 		col += 1;
-		self.cancelButton = tk.Button(self, text = 'Annuler', width = self._buttonWidth, height = self._widgetHeight, command = self.__onCancelButtonClick);
-		self.cancelButton.grid(row = row, column = col);
+		cancelButton = tk.Button(self, text = 'Annuler', width = self._buttonWidth, height = self._widgetHeight, command = self.__onCancelButtonClick);
+		cancelButton.grid(row = row, column = col);
 
 
 	def __onSpeechTextClick(self, *args):

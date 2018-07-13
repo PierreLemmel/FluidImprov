@@ -28,8 +28,8 @@ window.pack(side = TOP, fill = BOTH, expand = True);
 
 
 window.speechPanel.OnSpeechSubmittedCallback(lambda text: controller.VoiceSpeak(text));
-window.speechPanel.OnRateSliderValueChangedCallback(lambda rate: controller.SetTextRate(rate));
-window.speechPanel.OnPitchSliderValueChangedCallback(lambda pitch: controller.SetTextPitch(pitch));
+window.speechPanel.OnRateSliderValueChangedCallback(lambda rate: controller.SetTextSpeechRate(rate));
+window.speechPanel.OnPitchSliderValueChangedCallback(lambda pitch: controller.SetTextSpeechPitch(pitch));
 window.speechPanel.OnCancelButtonClickedCallback(lambda: controller.VoiceCancel());
 
 tk.mainloop();

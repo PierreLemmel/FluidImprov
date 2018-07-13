@@ -16,10 +16,10 @@ class MainPanel(FluidPanel):
 
 		super(FluidPanel, self).__init__(parent, options);
 		
-		mainPane = tk.PanedWindow(self, orient = tk.HORIZONTAL);
+		mainPane = tk.PanedWindow(self, orient = tk.HORIZONTAL, relief = tk.RIDGE);
 
 
-		leftPane = tk.PanedWindow(mainPane, orient = tk.VERTICAL);
+		leftPane = tk.PanedWindow(mainPane, orient = tk.VERTICAL, relief = tk.SUNKEN);
 
 		topLeftPanel = tk.Frame(leftPane);
 		self.__initializeTopLeftPanel(topLeftPanel);
@@ -32,7 +32,7 @@ class MainPanel(FluidPanel):
 		mainPane.add(leftPane, stretch = "always");
 
 
-		rightPane = tk.PanedWindow(mainPane, orient = tk.VERTICAL);
+		rightPane = tk.PanedWindow(mainPane, orient = tk.VERTICAL, relief = tk.SUNKEN);
 
 		topRightPanel = tk.Frame(rightPane);
 		self.__initializeTopRightPanel(topRightPanel);
@@ -50,20 +50,20 @@ class MainPanel(FluidPanel):
 
 	def __initializeTopLeftPanel(self, topLeftPanel):
 
-		videoLabel = tk.Label(topLeftPanel, text = 'Vidéo', font = self.__labelsFont);
-		videoLabel.pack(side = tk.TOP, fill = tk.X);
+		speechLabel = tk.Label(topLeftPanel, text = 'Voix', font = self.__labelsFont);
+		speechLabel.pack(side = tk.TOP, fill = tk.X);
 
-		self.videoPanel = VideoPanel(topLeftPanel);
-		self.videoPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
-
+		self.speechPanel = SpeechPanel(topLeftPanel);
+		self.speechPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
+		
 
 	def __initializeBottomLeftPanel(self, bottomLeftPanel):
 
-		speechLabel = tk.Label(bottomLeftPanel, text = 'Voix', font = self.__labelsFont);
-		speechLabel.pack(side = tk.TOP, fill = tk.X);
+		videoLabel = tk.Label(bottomLeftPanel, text = 'Vidéo', font = self.__labelsFont);
+		videoLabel.pack(side = tk.TOP, fill = tk.X);
 
-		self.speechPanel = SpeechPanel(bottomLeftPanel);
-		self.speechPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
+		self.videoPanel = VideoPanel(bottomLeftPanel);
+		self.videoPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
 
 
 	def __initializeTopRightPanel(self, topRightPanel):

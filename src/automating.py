@@ -35,18 +35,18 @@ class Controller:
 		self.__execScript(script);
 
 
-	def SetTextRate(self, rate):
+	def SetTextSpeechRate(self, rate):
 		self.__navigateToIndexIfNeeded();
 
-		script = 'fluidImprov.config.textRate = {0}'.format(rate);
+		script = 'fluidImprov.config.textSpeechRate = {0}'.format(rate);
 
 		self.__execScript(script);
 
 
-	def SetTextPitch(self, pitch):
+	def SetTextSpeechPitch(self, pitch):
 		self.__navigateToIndexIfNeeded();
 
-		script = 'fluidImprov.config.textPitch = {0}'.format(pitch);
+		script = 'fluidImprov.config.textSpeechPitch = {0}'.format(pitch);
 
 		self.__execScript(script);
 
