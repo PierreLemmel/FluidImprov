@@ -21,11 +21,11 @@ class MainPanel(FluidPanel):
 
 		leftPane = tk.PanedWindow(mainPane, orient = tk.VERTICAL);
 
-		topLeftPanel = tk.Frame(leftPane, background = 'blue');
+		topLeftPanel = tk.Frame(leftPane);
 		self.__initializeTopLeftPanel(topLeftPanel);
 		leftPane.add(topLeftPanel, stretch = "always");
 
-		bottomLeftPanel = tk.Frame(leftPane, background = 'red');
+		bottomLeftPanel = tk.Frame(leftPane);
 		self.__initializeBottomLeftPanel(bottomLeftPanel);
 		leftPane.add(bottomLeftPanel, stretch = "always");
 
@@ -34,11 +34,11 @@ class MainPanel(FluidPanel):
 
 		rightPane = tk.PanedWindow(mainPane, orient = tk.VERTICAL);
 
-		topRightPanel = tk.Frame(rightPane, background = 'black');
+		topRightPanel = tk.Frame(rightPane);
 		self.__initializeTopRightPanel(topRightPanel);
 		rightPane.add(topRightPanel, stretch = "always");
 
-		bottomRightPanel = tk.Frame(rightPane, background = 'white');
+		bottomRightPanel = tk.Frame(rightPane);
 		self.__initializeBottomRightPanel(bottomRightPanel);
 		rightPane.add(bottomRightPanel, stretch = "always");
 		
