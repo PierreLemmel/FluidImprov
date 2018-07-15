@@ -32,6 +32,16 @@ window.speechPanel.OnRateSliderValueChangedCallback(lambda rate: controller.SetT
 window.speechPanel.OnPitchSliderValueChangedCallback(lambda pitch: controller.SetTextSpeechPitch(pitch));
 window.speechPanel.OnCancelButtonClickedCallback(lambda: controller.VoiceCancel());
 
+
+window.textPanel.OnTextSizeSliderValueChangedCallback(lambda textSize: controller.SetTextSize(textSize));
+window.textPanel.OnTextFadeTimeSliderValueChangedCallback(lambda fadeDuration: controller.SetTextFadeDuration(fadeDuration));
+window.textPanel.OnShowButtonClickedCallback(lambda text: controller.FadeInText(text));
+window.textPanel.OnHideButtonClickedCallback(lambda: controller.FadeOutText());
+
+
+window.videoPanel.OnPlayButtonClickedCallback(lambda: controller.PlayVideo());
+window.videoPanel.OnPauseButtonClickedCallback(lambda: controller.StopVideo());
+
 tk.mainloop();
 
 

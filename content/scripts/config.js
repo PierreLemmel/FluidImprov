@@ -5,7 +5,6 @@
 	let _textSpeechRate = 1.0;
 	let _textSpeechPitch = 1.0;
 
-	let _textSize = 40;
 	let _textFadeDuration = 400;
 
 	fluidImprov.config = {};
@@ -30,18 +29,6 @@
 			}
 			else {
 				throw "Invalid textSpeechPitch!";
-			}
-		}
-	});
-
-	Object.defineProperty(fluidImprov.config, 'textSize', {
-		get() { return _textSize; },
-		set(value) {
-			if (value >= 10 && value <= 120) {
-				_textSize = value;
-			}
-			else {
-				throw "Invalid textSize!";
 			}
 		}
 	});

@@ -1,0 +1,60 @@
+@font-face {
+	font-family: GlossAndBloom;
+	src: url('../fonts/Gloss_And_Bloom.ttf');
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+}
+
+div.white-default-background, div.fullscreen-video-background {
+    position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+div.white-default-background {
+	background-color: white;
+	z-index: -200;
+}
+
+div.fullscreen-video-background {
+    z-index: -100;
+}
+
+video.fullscreen-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+div.main-container, div.fluid-fade-container {
+	width: 100%;
+	height: 100%;
+}
+
+div.main-container {
+	transform: translate(0%, 0%);
+}
+
+div.fluid-text-container {
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	opacity: 0.88;
+}
+
+div.fluid-text {
+	text-align: center;
+	font-size: 300px;
+	font-family: GlossAndBloom;
+	color: #ececec;
+	text-shadow: 7px 6px 15px rgba(53, 53, 53, 0.84);
+}

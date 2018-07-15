@@ -68,7 +68,7 @@ class TextPanel(FluidPanel):
 		textSizeLabel.grid(row = row, column = col);
 		col += 1;
 
-		self.textSizeSlider = FluidSlider(self, minValue = 10, maxValue = 120, initialValue = 40, 
+		self.textSizeSlider = FluidSlider(self, minValue = 100, maxValue = 400, initialValue = 300, 
 										valueFormat = 'Taille du texte : {0:0g}', labelFormat = '{0:0g}', command = self.__onTextSizeSliderValueChanged);
 		self.textSizeSlider.grid(row = row, column = col, rowspan = 1, columnspan = 4, sticky = self.NSEW);
 
@@ -92,7 +92,7 @@ class TextPanel(FluidPanel):
 		showButton.grid(row = row, column = col);
 		col += 1;
 
-		cancelButton = tk.Button(self, text = 'Annuler', width = self._buttonWidth, height = self._widgetHeight, command = self.__onHideButtonClicked);
+		cancelButton = tk.Button(self, text = 'Cacher', width = self._buttonWidth, height = self._widgetHeight, command = self.__onHideButtonClicked);
 		cancelButton.grid(row = row, column = col);
 
 
@@ -110,7 +110,8 @@ class TextPanel(FluidPanel):
 
 	def __onShowButtonClicked(self, *args):
 		if self.__onShowButtonClickedCallback is not None:
-			self.__onShowButtonClickedCallback();
+			text = self.textEntry.get('1.0', 'end-1c');
+			self.__onShowButtonClickedCallback(text);
 
 
 	def __onHideButtonClicked(self, *args):
