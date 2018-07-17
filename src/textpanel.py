@@ -1,7 +1,10 @@
 import tkinter as tk;
 
+import io;
+
 from fluidpanel import FluidPanel;
 from fluidslider import FluidSlider;
+from fluidfoldercombobox import FluidFolderCombobox;
 
 class TextPanel(FluidPanel):
 
@@ -15,10 +18,12 @@ class TextPanel(FluidPanel):
 		self.__onHideButtonClickedCallback = None;
 
 		hWeights = [0, 1, 0, 0, 1];
-		vWeights = [1, 0, 0, 0];
+		vWeights = [1, 0, 0, 0, 0];
 
 		row = 0;
 		self.__initializeTextAreaRow(row);
+		row += 1;
+		self.__initializeContentCombobox(row);
 		row += 1;
 		self.__initializeTextSizeSliderRow(row);
 		row += 1;
@@ -61,6 +66,17 @@ class TextPanel(FluidPanel):
 		self.textEntry.grid(row = row, column = col, rowspan = 1, columnspan = 4, sticky = self.NSEW);
 
 
+	def __initializeContentCombobox(self, row):
+		col = 0;
+
+		sourceLabel = tk.Label(self, anchor = tk.E, text = 'Source :');
+		sourceLabel.grid(row = row, column = col);
+		col += 1;
+
+		self.sourceCombo = FluidFolderCombobox(self, command = self.__onTextSourceValueChanged, folder = 'texts', extension = '.txt');
+		self.sourceCombo.grid(row = row, column = col, rowspan = 1, columnspan = 4, sticky = self.NSEW);
+
+
 	def __initializeTextSizeSliderRow(self, row):
 		col = 0;
 
@@ -96,10 +112,24 @@ class TextPanel(FluidPanel):
 		cancelButton.grid(row = row, column = col);
 
 
+	def __readFromFile(self, filename):
+		with io.open(filename, 'r', encoding = 'utf8') as fstream:
+			text = fstream.read();
+			return text;
+
+
 	def __onTextSizeSliderValueChanged(self, *args):
 		if self.__onTextSizeSliderValueChangedCallback is not None:
 			textSize = self.textSizeSlider.get();
 			self.__onTextSizeSliderValueChangedCallback(textSize);
+
+
+	def __onTextSourceValueChanged(self, *args):
+		filename = self.sourceCombo.getFullValue();
+		text = self.__readFromFile(filename);
+
+		self.textEntry.delete('1.0', tk.END);
+		self.textEntry.insert(tk.END, text);
 
 
 	def __onFadeTimeSliderValueChanged(self, *args):

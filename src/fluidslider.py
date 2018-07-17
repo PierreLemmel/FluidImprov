@@ -67,12 +67,3 @@ class FluidSlider(FluidPanel):
 
 	def get(self):
 		return self.__number;
-
-
-	def _retrieveParam(self, options, key, default = None):
-		value = options.get(key, default);
-
-		if (key in options):
-			del options[key];
-
-		return value;

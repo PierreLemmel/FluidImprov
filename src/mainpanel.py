@@ -50,11 +50,11 @@ class MainPanel(FluidPanel):
 
 	def __initializeTopLeftPanel(self, topLeftPanel):
 
-		speechLabel = tk.Label(topLeftPanel, text = 'Voix', font = self.__labelsFont);
-		speechLabel.pack(side = tk.TOP, fill = tk.X);
+		textLabel = tk.Label(topLeftPanel, text = 'Texte', font = self.__labelsFont);
+		textLabel.pack(side = tk.TOP, fill = tk.X);
 
-		self.speechPanel = SpeechPanel(topLeftPanel);
-		self.speechPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
+		self.textPanel = TextPanel(topLeftPanel);
+		self.textPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
 		
 
 	def __initializeBottomLeftPanel(self, bottomLeftPanel):
@@ -68,11 +68,12 @@ class MainPanel(FluidPanel):
 
 	def __initializeTopRightPanel(self, topRightPanel):
 
-		textLabel = tk.Label(topRightPanel, text = 'Texte', font = self.__labelsFont);
-		textLabel.pack(side = tk.TOP, fill = tk.X);
+		speechLabel = tk.Label(topRightPanel, text = 'Voix', font = self.__labelsFont);
+		speechLabel.pack(side = tk.TOP, fill = tk.X);
 
-		self.textPanel = TextPanel(topRightPanel);
-		self.textPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
+		self.speechPanel = SpeechPanel(topRightPanel);
+		self.speechPanel.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = 1);
+		
 
 
 	def __initializeBottomRightPanel(self, bottomRightPanel):

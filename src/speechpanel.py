@@ -1,7 +1,10 @@
 import tkinter as tk;
 
+import io;
+
 from fluidpanel import FluidPanel;
 from fluidslider import FluidSlider;
+from fluidfoldercombobox import FluidFolderCombobox;
 
 class SpeechPanel(FluidPanel):
 
@@ -14,10 +17,12 @@ class SpeechPanel(FluidPanel):
 		self.__cancelButtonClickedCallback = None;
 		
 		hWeights = [0, 1, 0, 0, 1];
-		vWeights = [1, 0, 0, 0];
+		vWeights = [1, 0, 0, 0, 0];
 
 		row = 0;
 		self.__initializeSpeechTextRow(row);
+		row += 1;
+		self.__initializeSourceCombobox(row);
 		row += 1;
 		self.__initializeRateScaleRow(row);
 		row += 1;
@@ -60,6 +65,17 @@ class SpeechPanel(FluidPanel):
 		self.speechTextEntry.grid(row = row, column = col, rowspan = 1, columnspan = 4, sticky = self.NSEW);	
 
 
+	def __initializeSourceCombobox(self, row):
+		col = 0;
+
+		sourceLabel = tk.Label(self, anchor = tk.E, text = 'Source :');
+		sourceLabel.grid(row = row, column = col);
+		col += 1;
+
+		self.sourceCombo = FluidFolderCombobox(self, command = self.__onSpeechSourceValueChanged, folder = 'speeches', extension = '.txt');
+		self.sourceCombo.grid(row = row, column = col, rowspan = 1, columnspan = 4, sticky = self.NSEW);
+
+
 	def __initializeRateScaleRow(self, row):
 
 		col = 0;
@@ -95,10 +111,24 @@ class SpeechPanel(FluidPanel):
 		cancelButton.grid(row = row, column = col);
 
 
+	def __readFromFile(self, filename):
+		with io.open(filename, 'r', encoding = 'utf8') as fstream:
+			text = fstream.read();
+			return text;
+
+
 	def __onSpeechTextClick(self, *args):
 		if self.__speechSubmittedCallback is not None:
 			text = self.speechTextEntry.get('1.0', 'end-1c');
 			self.__speechSubmittedCallback(text);
+
+
+	def __onSpeechSourceValueChanged(self, *args):
+		filename = self.sourceCombo.getFullValue();
+		text = self.__readFromFile(filename);
+
+		self.speechTextEntry.delete('1.0', tk.END);
+		self.speechTextEntry.insert(tk.END, text);
 
 
 	def __onRateSliderChanged(self, *args):

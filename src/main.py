@@ -41,8 +41,17 @@ window.textPanel.OnHideButtonClickedCallback(lambda: controller.FadeOutText());
 
 window.videoPanel.OnPlayButtonClickedCallback(lambda: controller.PlayVideo());
 window.videoPanel.OnPauseButtonClickedCallback(lambda: controller.StopVideo());
+window.videoPanel.OnVideoSourceChangedCallback(lambda source: controller.SetVideoSource(source));
+window.videoPanel.OnFadeDurationSliderValueChangedCallback(lambda fadeDuration: controller.SetVideoFadeDuration(fadeDuration));
+
+
+window.musicPanel.OnPlayButtonClickedCallback(lambda: controller.PlayAudio());
+window.musicPanel.OnPauseButtonClickedCallback(lambda: controller.StopAudio());
+window.musicPanel.OnAudioSourceChangedCallback(lambda source: controller.SetAudioSource(source));
+
 
 tk.mainloop();
+tk.quit();
 
 
 print('Exiting program');

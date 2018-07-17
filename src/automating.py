@@ -31,7 +31,7 @@ class Controller:
 
 	def VoiceCancel(self):
 		self._navigateToIndexIfNeeded();
-		script = 'fluidImprov.voiceControl.cancel()';
+		script = 'fluidImprov.voiceControl.cancel();';
 		self._execScript(script);
 
 
@@ -66,13 +66,13 @@ class Controller:
 	def FadeInText(self, text):
 		self._navigateToIndexIfNeeded();
 		escapedText = self.__escapeText(text);
-		script = 'fluidImprov.textControl.fadeInText()';
+		script = 'fluidImprov.textControl.fadeInText();';
 		self._execScript(script);
 
 
 	def FadeOutText(self):
 		self._navigateToIndexIfNeeded();
-		script = 'fluidImprov.textControl.fadeOutText()';
+		script = 'fluidImprov.textControl.fadeOutText();';
 		self._execScript(script);
 
 
@@ -82,15 +82,47 @@ class Controller:
 	#########################
 	def PlayVideo(self):
 		self._navigateToIndexIfNeeded();
-		script = 'fluidImprov.videoControl.playVideo()';
+		script = 'fluidImprov.videoControl.playVideo();';
 		self._execScript(script);
 
 
 	def StopVideo(self):
 		self._navigateToIndexIfNeeded();
-		script = 'fluidImprov.videoControl.stopVideo()';
+		script = 'fluidImprov.videoControl.stopVideo();';
 		self._execScript(script);
 
+
+	def SetVideoSource(self, source):
+		self._navigateToIndexIfNeeded();
+		script = 'fluidImprov.videoControl.setVideoSource("{0}");'.format(source);
+		self._execScript(script);
+
+
+	def SetVideoFadeDuration(self, fadeDuration):
+		self._navigateToIndexIfNeeded();
+		script = 'fluidImprov.config.videoFadeDuration = {0};'.format(fadeDuration);
+		self._execScript(script);
+
+
+	#########################
+	# 		Audio panel		#
+	#########################
+	def PlayAudio(self):
+		self._navigateToIndexIfNeeded();
+		script = 'fluidImprov.audioControl.playAudio();';
+		self._execScript(script);
+
+
+	def StopAudio(self):
+		self._navigateToIndexIfNeeded();
+		script = 'fluidImprov.audioControl.stopAudio();';
+		self._execScript(script);
+
+
+	def SetAudioSource(self, source):
+		self._navigateToIndexIfNeeded();
+		script = 'fluidImprov.audioControl.setAudioSource("{0}");'.format(source);
+		self._execScript(script);
 
 
 	#########################
@@ -104,7 +136,7 @@ class Controller:
 
 
 	def _execScript(self, script):
-		print('Executing script: {0}'.format(script));
+		#print('Executing script: {0}'.format(script));
 		self.driver.execute_script(script);
 
 

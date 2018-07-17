@@ -7,6 +7,8 @@
 
 	let _textFadeDuration = 400;
 
+	let _videoFadeDuration = 2500;
+
 	fluidImprov.config = {};
 
 	Object.defineProperty(fluidImprov.config, 'textSpeechRate', {
@@ -43,6 +45,18 @@
 				throw "Invalid textFadeDuration!";
 			}
 		}
-	})
+	});
+
+	Object.defineProperty(fluidImprov.config, 'videoFadeDuration', {
+		get() { return _videoFadeDuration; },
+		set(value) {
+			if (value >= 0.0 && value <= 4000.0) {
+				_videoFadeDuration = value;
+			}
+			else {
+				throw "Invalid videoFadeDuration!";
+			}
+		}
+	});
 
 })(window.fluidImprov = window.fluidImprov || {});

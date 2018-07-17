@@ -37,3 +37,12 @@ class FluidPanel(tk.Frame):
 	def _funcCheck(self, func):
 		if not callable(func):
 			raise ValueError('The input parameter is not a function');
+
+
+	def _retrieveParam(self, options, key, default = None):
+		value = options.get(key, default);
+
+		if (key in options):
+			del options[key];
+
+		return value;
